@@ -9,4 +9,4 @@ Each edition has its own branch, named `editions/[EDITION]`. The default branch 
 | Branch                                                                           | Edition | Release Date |
 | -------------------------------------------------------------------------------- |:-------:|:------------:|
 | [editions/2.0](https://github.com/raywenderlich/kco-materials/tree/editions/2.0) | 2.0     | 2019-09-18   |
-
+| [editions/3.0](https://github.com/raywenderlich/kco-materials/tree/editions/3.0) | 3.0     | YYYY-MM-DD   |
