@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.3.41'
-    ext.kotlin_coroutines_version = '1.3.0-RC'
+    ext.kotlin_coroutines_version = '1.3.7'
 
     repositories {
         mavenCentral()
@@ -25,7 +25,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-swing:$kotlin_coroutines_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }
 
 compileKotlin {
