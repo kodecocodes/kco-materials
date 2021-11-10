@@ -1,5 +1,0 @@
-<resources>
-  <string name="app_name">Async Wars</string>
-  <string name="start_bitmap_download_btn_text">Start</string>
-  <string name="helper_text">Spinner animation to check UI blocking calls</string>
-</resources>
