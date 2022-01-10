@@ -21,8 +21,7 @@ fun main() = runBlocking {
     try {
       childJob.join()
     } catch (e: CancellationException) {
-      println("Rethrowing CancellationException" +
-          " with original cause")
+      println("Rethrowing CancellationException with original cause")
       throw e
     }
   }
