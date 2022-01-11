@@ -33,18 +33,31 @@
  */
 package com.raywenderlich.exceptionhandling
 
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-fun main() = runBlocking {
-  val result = async {
-    println("Throwing exception in async")
-    throw IllegalStateException()
-  }
+@OptIn(DelicateCoroutinesApi::class)
+fun main() {
+  runBlocking {
+    // Set this to 'true' to call await on the deferred variable
+    val callAwaitOnDeferred = false
 
-  try {
-    result.await()
-  } catch (e: Exception) {
-    println("Caught $e")
+    val deferred = GlobalScope.async {
+      // This statement will be printed with or without
+      // a call to await()
+      println("Throwing exception from async")
+      throw ArithmeticException("Something Crashed")
+      // Nothing is printed, relying on a call to await()
+    }
+
+    if (callAwaitOnDeferred) {
+      try {
+        deferred.await()
+      } catch (e: ArithmeticException) {
+        println("Caught ArithmeticException")
+      }
+    }
   }
 }

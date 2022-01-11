@@ -37,7 +37,8 @@ import kotlinx.coroutines.*
 
 fun main() = runBlocking {
   // 1
-  supervisorScope {
+  val supervisor = SupervisorJob()
+  with(CoroutineScope(coroutineContext + supervisor)) {
     // 2
     val firstChild = launch {
       println("First child throwing an exception")
@@ -55,7 +56,7 @@ fun main() = runBlocking {
     // 4
     firstChild.join()
     println("Second child is active: ${secondChild.isActive}")
-    cancel()
+    supervisor.cancel()
     secondChild.join()
   }
 }

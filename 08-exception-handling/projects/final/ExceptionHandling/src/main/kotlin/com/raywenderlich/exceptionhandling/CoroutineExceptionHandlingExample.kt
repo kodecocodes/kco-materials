@@ -33,18 +33,29 @@
  */
 package com.raywenderlich.exceptionhandling
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
+// 1
+@OptIn(DelicateCoroutinesApi::class)
 fun main() = runBlocking {
-  val result = async {
-    println("Throwing exception in async")
-    throw IllegalStateException()
+  // 2
+  val launchJob = GlobalScope.launch {
+    println("1. Exception created via launch coroutine")
+    throw IndexOutOfBoundsException()
   }
-
+  // 3
+  launchJob.join()
+  println("2. Joined failed job")
+  // 4
+  val deferred = GlobalScope.async {
+    println("3. Exception created via async coroutine")
+    throw ArithmeticException()
+  }
+  // 5
   try {
-    result.await()
+    deferred.await()
+    println("4. Unreachable, this statement is never executed")
   } catch (e: Exception) {
-    println("Caught $e")
+    println("5. Caught ${e.javaClass.simpleName}")
   }
 }

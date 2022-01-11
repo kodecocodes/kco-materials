@@ -33,18 +33,27 @@
  */
 package com.raywenderlich.exceptionhandling
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
-fun main() = runBlocking {
-  val result = async {
-    println("Throwing exception in async")
-    throw IllegalStateException()
-  }
-
-  try {
-    result.await()
-  } catch (e: Exception) {
-    println("Caught $e")
+@OptIn(DelicateCoroutinesApi::class)
+fun main() {
+  runBlocking {
+    // 1
+    val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+      println("Caught $exception")
+    }
+    // 2
+    val job = GlobalScope.launch(exceptionHandler) {
+      throw AssertionError("My Custom Assertion Error!")
+    }
+    // 3
+    val deferred = GlobalScope.async(exceptionHandler) {
+      // Nothing will be printed,
+      // relying on user to call deferred.await()
+      throw ArithmeticException()
+    }
+    // 4
+    // This suspends current coroutine until all given jobs are complete.
+    joinAll(job, deferred)
   }
 }
