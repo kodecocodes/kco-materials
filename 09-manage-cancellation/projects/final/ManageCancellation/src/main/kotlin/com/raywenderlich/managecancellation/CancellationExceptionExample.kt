@@ -40,16 +40,14 @@ import java.io.IOException
 fun main() = runBlocking {
   // 1
   val handler = CoroutineExceptionHandler { _, exception ->
-  // 6
+    // 6
     println("Caught original $exception")
   }
   // 2
   val parentJob = GlobalScope.launch(handler) {
     val childJob = launch {
-      launch {
-        // 4
-        throw IOException()
-      }
+      // 4
+      throw IOException()
     }
 
     try {
