@@ -4,14 +4,29 @@ import java.io.File
 fun main() {
   val scope = CustomScope()
 
+  val userId = 992
+
   scope.launch {
-    println("Launching in custom scope")
+    println("Finding user")
+    val userDeferred = getUserByIdFromNetwork(userId, scope)
+    val usersFromFileDeferred = readUsersFromFile("users.txt", scope)
+
+    val userStoredInFile = checkUserExists(
+      userDeferred.await(), usersFromFileDeferred.await()
+    )
+
+    if (userStoredInFile) {
+      println("Found user in file!")
+    }
   }
 
-  scope.onStop() //cancels all the coroutines
+  /**
+   * Cancels all the coroutines. You should only see "Finding user" printed out before the program ends.
+   */
+  scope.onStop()
 }
 
-private suspend fun getUserByIdFromNetwork(userId: Int) = GlobalScope.async {
+private suspend fun getUserByIdFromNetwork(userId: Int, scope: CoroutineScope) = scope.async {
   println("Retrieving user from network")
   delay(3000)
   println("Still in the coroutine")
@@ -19,8 +34,8 @@ private suspend fun getUserByIdFromNetwork(userId: Int) = GlobalScope.async {
   User(userId, "Filip", "Babic") // we simulate the network call
 }
 
-private fun readUsersFromFile(filePath: String) =
-  GlobalScope.async {
+private fun readUsersFromFile(filePath: String, scope: CoroutineScope) =
+  scope.async {
     println("Reading the file of users")
     delay(1000)
 
