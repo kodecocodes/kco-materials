@@ -1,18 +1,17 @@
+import contextProvider.CoroutineContextProvider
 import contextProvider.CoroutineContextProviderImpl
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 fun main() {
-  val backgroundContextProvider = CoroutineContextProviderImpl(Dispatchers.Default)
+  val parentJob = Job()
+  val provider: CoroutineContextProvider = CoroutineContextProviderImpl(
+    context = parentJob + Dispatchers.IO
+  )
 
-  val coroutineErrorHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-    throwable.printStackTrace() // we just print the error here
-  }
-
-  val emptyParentJob = Job()
-
-  val combinedContext = backgroundContextProvider.context() + coroutineErrorHandler + emptyParentJob
-
-  GlobalScope.launch(context = combinedContext) {
+  GlobalScope.launch(context = provider.context()) {
     println(Thread.currentThread().name)
   }
 
