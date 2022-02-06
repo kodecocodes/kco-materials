@@ -9,9 +9,9 @@ fun main() {
 
 fun generatorFib() = sequence {
   print("Suspending...")
-  yield(0)
-  var cur = 0
-  var next = 1
+  yield(0L)
+  var cur = 0L
+  var next = 1L
   while (true) {
     print("Suspending...")
     yield(next)
