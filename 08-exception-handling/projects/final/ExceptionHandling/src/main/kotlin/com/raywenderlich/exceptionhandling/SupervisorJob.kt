@@ -36,5 +36,27 @@ package com.raywenderlich.exceptionhandling
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
-
+  // 1
+  val supervisor = SupervisorJob()
+  with(CoroutineScope(coroutineContext + supervisor)) {
+    // 2
+    val firstChild = launch {
+      println("First child throwing an exception")
+      throw ArithmeticException()
+    }
+    // 3
+    val secondChild = launch {
+      println("First child is cancelled: ${firstChild.isCancelled}")
+      try {
+        delay(5000)
+      } catch (e: CancellationException) {
+        println("Second child cancelled because supervisor got cancelled.")
+      }
+    }
+    // 4
+    firstChild.join()
+    println("Second child is active: ${secondChild.isActive}")
+    supervisor.cancel()
+    secondChild.join()
+  }
 }

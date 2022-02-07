@@ -33,7 +33,7 @@
  */
 package com.raywenderlich.exceptionhandling
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
 
