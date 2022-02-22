@@ -1,35 +1,15 @@
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.io.File
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.*
 
 fun main() {
-
-  GlobalScope.launch {
+  GlobalScope.launch(Dispatchers.Main) {
     val user = getUserSuspend("101")
 
     println(user)
   }
 }
 
-suspend fun getUserSuspend(userId: String): User {
+suspend fun getUserSuspend(userId: String): User = withContext(Dispatchers.Default) {
   delay(1000)
 
-  return User(userId, "Filip")
-}
-
-suspend fun readFileSuspend(path: String): File =
-    suspendCoroutine {
-      readFile(path) { file ->
-        it.resume(file)
-      }
-    }
-
-fun readFile(path: String, onReady: (File) -> Unit) {
-  Thread.sleep(1000)
-  // some heavy operation
-
-  onReady(File(path))
+  User(userId, "Filip")
 }
