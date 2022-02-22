@@ -16,6 +16,7 @@ class CustomScope : CoroutineScope {
 
   fun onStop() {
     parentJob.cancel()
-    // You can also cancel the whole scope with `cancel(cause: CancellationException)`
+    // You can also cancel the whole scope
+    // with `cancel(cause: CancellationException)`
   }
 }
