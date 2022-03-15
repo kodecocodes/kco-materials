@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.raywenderlich.android.disneyexplorer">
+
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <application
+    android:name=".App"
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.DisneyExplorer"
+    android:usesCleartextTraffic="true">
+    <activity
+      android:name=".ui.activity.DisneyActivity"
+      android:exported="false" />
+    <activity
+      android:name=".ui.activity.UiLayerActivity"
+      android:exported="false" />
+    <activity
+      android:name=".ui.activity.IntroActivity"
+      android:exported="true"
+      android:theme="@style/Theme.App.Startup">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="com.raywenderlich.android.disneyexplorer.ui.compose.DisneyComposeActivity"
+      android:exported="false"
+      android:label="@string/title_activity_disney" />
+    <activity
+      android:name=".ui.activity.BackgroundProcessingActivity"
+      android:exported="false" />
+  </application>
+
+</manifest>
