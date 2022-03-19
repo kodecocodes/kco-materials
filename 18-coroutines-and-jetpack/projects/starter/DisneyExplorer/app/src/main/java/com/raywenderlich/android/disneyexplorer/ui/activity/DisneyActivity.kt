@@ -40,11 +40,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.android.disneyexplorer.R
@@ -52,9 +48,6 @@ import com.raywenderlich.android.disneyexplorer.data.model.DisneyCharacter
 import com.raywenderlich.android.disneyexplorer.databinding.ActivityNetworkingBinding
 import com.raywenderlich.android.disneyexplorer.di.DependencyHolder
 import com.raywenderlich.android.disneyexplorer.ui.adapter.list.DisneyAdapter
-import com.raywenderlich.android.disneyexplorer.ui.viewmodel.DisneyViewModel
-import com.raywenderlich.android.disneyexplorer.ui.viewmodel.DisneyViewModelFactory
-import kotlinx.coroutines.launch
 
 class DisneyActivity : AppCompatActivity() {
   private lateinit var binding: ActivityNetworkingBinding
@@ -91,19 +84,11 @@ class DisneyActivity : AppCompatActivity() {
   }
 
   private fun fetchDisneyCharacters() {
-    lifecycleScope.launch {
-      repeatOnLifecycle(Lifecycle.State.STARTED) {
-        disneyRepository.getDisneyCharacters().collect {
-          showResults(it)
-        }
-      }
-    }
+
   }
 
   private fun getFreshData() {
-    lifecycleScope.launch {
-      disneyRepository.getFreshData()
-    }
+
   }
 
   companion object {

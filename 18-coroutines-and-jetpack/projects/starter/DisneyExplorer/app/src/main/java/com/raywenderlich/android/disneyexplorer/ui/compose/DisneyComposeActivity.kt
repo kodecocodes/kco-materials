@@ -43,7 +43,7 @@ class DisneyComposeActivity : ComponentActivity() {
 
   private suspend fun showToast() {
     delay(200)
-    Toast.makeText(this, "Refreshing Data", Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, "Data loaded", Toast.LENGTH_SHORT).show()
   }
 
   companion object {
@@ -54,12 +54,7 @@ class DisneyComposeActivity : ComponentActivity() {
 
 @Composable
 fun MainDisneyScreen(viewModel: DisneyViewModel) {
-  // TODO: Add LaunchedEffect here
-  Column {
-    Toolbar { viewModel.getFreshData() }
-//    val charactersList by uiStateFlow.collectAsState(emptyList())
-//    CharacterList(characterList = charactersList)
-  }
+
 }
 
 @Composable

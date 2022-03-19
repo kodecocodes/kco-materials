@@ -36,20 +36,12 @@ package com.raywenderlich.android.disneyexplorer.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.raywenderlich.android.disneyexplorer.data.repository.DisneyRepository
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class DisneyViewModel(private val disneyRepo: DisneyRepository) : ViewModel() {
-  val charactersLiveData = disneyRepo.getDisneyCharacters().asLiveData() // 2
 
-  // 3
-  fun getFreshData() {
-    viewModelScope.launch { disneyRepo.getFreshData() }
-  }
 }
 
 class DisneyViewModelFactory(private val repo: DisneyRepository) : ViewModelProvider.Factory {
