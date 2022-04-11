@@ -1,0 +1,18 @@
+<resources>
+  <string name="app_name">DisneyExplorer</string>
+  <string name="cd_character_image">Character Image</string>
+  <string name="start_processing">Start processing</string>
+  <string name="calculating_fibonacci">Calculating fibonacci number on UI thread...</string>
+  <string name="cd_char_image">Character image</string>
+  <string name="title_activity_disney">DisneyActivity</string>
+  <string name="background_processing">Background Processing Examples</string>
+  <string name="flow_examples">Flow Examples</string>
+  <string name="networking_persistence_jetpack">Networking, Persistence, Jetpack</string>
+  <string name="chapter_17">Chapter 17</string>
+  <string name="chapter_18">Chapter 18</string>
+  <string name="flow_producing_numbers">Flow producing numbers…</string>
+  <string name="get_disney_characters">Get Disney characters</string>
+  <string name="jetpack_compose">Jetpack Compose</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
